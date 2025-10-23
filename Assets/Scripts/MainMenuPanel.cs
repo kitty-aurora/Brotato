@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class black : MonoBehaviour
 {
-    public void OnPointerExit(PointerEventData eventData)
+    public Button startButton;
+    public Button settingButton;
+    public Button progressButton;
+    public Button exitButton;
+    
     // Start is called before the first frame update
     void Start()
     {
