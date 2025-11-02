@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Model;
 using TMPro;
 using UnityEngine;
@@ -8,33 +6,50 @@ using UnityEngine.UI;
 
 public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    // 角色
-    public Image _backImage;
-    public Image _avatar;
+    private Image _backImage;
+    private Image _avatar;
 
-    // 上面的控制面板
-    public Button _button;
-    public Image _roleDetailAvatar;
-    public TextMeshProUGUI _roleDetailRoleName;
-    public TextMeshProUGUI _roleDetailRoleDescribe;
+    // 缓存详情面板里的控件（自动寻找）
+    private Image _roleDetailAvatar;
+    private TextMeshProUGUI _roleDetailRoleName;
+    private TextMeshProUGUI _roleDetailRoleDescribe;
 
-    // 缓存 给面板传递角色头像
     private RoleData _roleData;
-    // Start is called before the first frame update
-    
-    
-    void Start()
+    private Color _color;
+
+    private void Awake()
     {
-        
+        _backImage = GetComponent<Image>();
+        _color = _backImage.color;
+        _avatar = transform.Find("Avatar")?.GetComponent<Image>();
+
+        // 自动找到详情面板里的 UI 组件（按名称查找）
+        var panel = GameObject.Find("RoleDetailPanel");
+        if (panel != null)
+        {
+            _roleDetailAvatar = panel.transform.Find("Avatar/Avatar_Role")?.GetComponent<Image>();
+            _roleDetailRoleName = panel.transform.Find("RoleName")?.GetComponent<TextMeshProUGUI>();
+            _roleDetailRoleDescribe = panel.transform.Find("RoleDescribe")?.GetComponent<TextMeshProUGUI>();
+        }
+        else
+        {
+            Debug.LogWarning("未找到角色详情面板（RoleDetailPanel）！");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetRoleData(RoleData data)
     {
-        
+        _roleData = data;
+
+        // 设置角色头像
+        if (_avatar != null)
+        {
+            var sprite = Resources.Load<Sprite>(data.avatarImagePath);
+            if (sprite != null)
+                _avatar.sprite = sprite;
+        }
     }
-    
-    
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _backImage.color = Color.black;
@@ -45,31 +60,22 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _backImage.color = new Color(35 / 255f, 35 / 255f, 35 / 255f);
+        _backImage.color = _color;
         _backImage.rectTransform.localScale = Vector3.one;
         _avatar.rectTransform.localScale = Vector3.one;
     }
 
-    /*
-     * 点鸡后调用
-     */
-    public void RenewUI(RoleData data)
+    private void RenewUI(RoleData data)
     {
-        _roleDetailAvatar.sprite = Resources.Load<Sprite>(data.avatarImagePath);
-        _roleDetailRoleName.text = data.name;
-        _roleDetailRoleDescribe.text = data.describe;
-        // // 未解锁
-        // if (data.unlock.Equals(1))
-        // {
-        //     
-        // }
-        // // 解锁
-        // else
-        // {
-        //     // 修改详情页面
-        //     
-        // }
-    }
+        if (data == null) return;
 
-    
+        if (_roleDetailAvatar != null)
+            _roleDetailAvatar.sprite = Resources.Load<Sprite>(data.avatarImagePath);
+
+        if (_roleDetailRoleName != null)
+            _roleDetailRoleName.text = data.name;
+
+        if (_roleDetailRoleDescribe != null)
+            _roleDetailRoleDescribe.text = data.describe;
+    }
 }
