@@ -13,14 +13,30 @@ public class RoleUIManager : MonoBehaviour
     [Header("角色列表容器")]
     public Transform roleListParent;
     
+   
+    private TextMeshProUGUI _titleText;
+    
+    private GameObject _recordPanel;
+    private GameObject _weaponSelectPanel;
+    
     // 角色数据
     private List<RoleData> roleList = new();
-
+    
+    // 武器数据
+    private List<WeaponData> weaponList = new();
+    
     private void Awake()
     {
         // 从 JSON 文件加载角色数据
         var roleTextAsset = Resources.Load<TextAsset>("Data/role");
         roleList = JsonConvert.DeserializeObject<List<RoleData>>(roleTextAsset.text);
+        // 加载武器数据
+        var weaponTextAsset = Resources.Load<TextAsset>("Data/weapon");
+        weaponList = JsonConvert.DeserializeObject<List<WeaponData>>(weaponTextAsset.text);
+        
+        _recordPanel = GameObject.Find("RoleRecordPanel");
+        _weaponSelectPanel = GameObject.Find("WeaponSelectPanel");
+        _titleText = GameObject.Find("Title").GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -34,5 +50,14 @@ public class RoleUIManager : MonoBehaviour
             var roleSelect = roleGO.GetComponent<RoleUISelect>();
             roleSelect.SetRoleData(roleData);
         }
+    }
+
+    public void ShowWeaponPanel()
+    {
+        _recordPanel.SetActive(false);
+       // _roleList
+        _weaponSelectPanel.SetActive(true);
+      //  _weaponList
+        _titleText.text = "武器选择";
     }
 }

@@ -10,7 +10,7 @@
         public string avatarImagePath;
         public string describe;
         public int slot;
-        public int record;
+        public string record;
         public int unlock;
         public string unlockConditions;
     }

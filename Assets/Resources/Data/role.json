@@ -16,7 +16,7 @@
     "avatarImagePath": "Image/人物/斗士",
     "describe": "使用<color=#00FF00>徒手</color>类武器时<color=#00FF00>+50%攻击速度</color>\n初始有用<color=#00FF00>1拳</color>\n<color=#00FF00>+15</color> %闪避\n<color=#FF0000>-50</color> 范围\n<color=#FF0000>-50</color> 远程伤害",
     "slot": 6,
-    "record": -1,
+    "record": 2,
     "unlock": 1,
     "unlockConditions": ""
 
@@ -28,7 +28,7 @@
     "avatarImagePath": "Image/人物/医生",
     "describe": "使用<color=#00FF00>医疗</color>类武器时+200%攻击速度\n<color=#00FF00>+5</color> 生命再生\n双倍生命再生\n<color=#00FF00>+5</color> 收获\n<color=#FF0000>-100</color> %攻击速度\n<color=#FF0000>护甲</color>的修改减少<color=#FF0000>50%</color>",
     "slot": 6,
-    "record": -1,
+    "record": 3,
     "unlock": 1,
     "unlockConditions": ""
 
@@ -50,7 +50,7 @@
     "avatarImagePath": "Image/人物/公牛",
     "describe": "<color=#00FF00>+20</color> 最大生命值\n<color=#00FF00>+15</color> 生命再生\n<color=#00FF00>+10</color> 护甲\n<color=#00FF00>生命再生</color>的修改增加<color=#00FF00>50%</color>\n当你受到伤害会爆炸, 造成<color=#00FF00>30</color>伤害\n你无法装备武器",
     "slot": 6,
-    "record": -1,
+    "record": 1,
     "unlock": 0,
     "unlockConditions": "一场游戏中最大生命值达到50"
 

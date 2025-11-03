@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    
+
+    private GameObject _recordPanel;
+    private GameObject _weaponSelectPanel;
+    
     private Image _backImage;
     private Image _avatar;
 
@@ -13,6 +18,7 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Image _roleDetailAvatar;
     private TextMeshProUGUI _roleDetailRoleName;
     private TextMeshProUGUI _roleDetailRoleDescribe;
+    private TextMeshProUGUI _recordText;
 
     private RoleData _roleData;
     private Color _color;
@@ -24,12 +30,15 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _avatar = transform.Find("Avatar")?.GetComponent<Image>();
 
         // 自动找到详情面板里的 UI 组件（按名称查找）
-        var panel = GameObject.Find("RoleDetailPanel");
-        if (panel != null)
+        var roleDetailPanel = GameObject.Find("RoleDetailPanel");
+        var roleRecordPanel = GameObject.Find("RoleRecordPanel");
+        
+        if (roleDetailPanel != null && roleRecordPanel != null)
         {
-            _roleDetailAvatar = panel.transform.Find("Avatar/Avatar_Role")?.GetComponent<Image>();
-            _roleDetailRoleName = panel.transform.Find("RoleName")?.GetComponent<TextMeshProUGUI>();
-            _roleDetailRoleDescribe = panel.transform.Find("RoleDescribe")?.GetComponent<TextMeshProUGUI>();
+            _roleDetailAvatar = roleDetailPanel.transform.Find("Avatar/Avatar_Role")?.GetComponent<Image>();
+            _roleDetailRoleName = roleDetailPanel.transform.Find("RoleName")?.GetComponent<TextMeshProUGUI>();
+            _roleDetailRoleDescribe = roleDetailPanel.transform.Find("RoleDescribe")?.GetComponent<TextMeshProUGUI>();
+            _recordText = roleRecordPanel.transform.Find("Record_Text").GetComponent<TextMeshProUGUI>();
         }
         else
         {
@@ -55,7 +64,7 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _backImage.color = Color.black;
         _backImage.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
         _avatar.rectTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
-        RenewUI(_roleData);
+        RenewRoleUI(_roleData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -65,7 +74,21 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _avatar.rectTransform.localScale = Vector3.one;
     }
 
-    private void RenewUI(RoleData data)
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        var roleUIManager = FindObjectOfType<RoleUIManager>();
+        if (roleUIManager != null)
+        {
+            roleUIManager.ShowWeaponPanel();
+        }
+        else
+        {
+            Debug.LogError("未找到RoleUIManager实例！");
+        }
+    }
+
+
+    private void RenewRoleUI(RoleData data)
     {
         if (data == null) return;
 
@@ -77,5 +100,8 @@ public class RoleUISelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         if (_roleDetailRoleDescribe != null)
             _roleDetailRoleDescribe.text = data.describe;
+
+        if (_recordText != null)
+            _recordText.text = data.record;
     }
 }
