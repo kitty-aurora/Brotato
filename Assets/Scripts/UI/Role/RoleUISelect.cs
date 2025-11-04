@@ -45,17 +45,7 @@ namespace UI.Role
             }
         }
 
-        public void SetRoleData(RoleData data)
-        {
-            _roleData = data;
-            // 设置角色头像
-            if (_avatar != null)
-            {
-                var sprite = Resources.Load<Sprite>(data.avatarImagePath);
-                if (sprite != null)
-                    _avatar.sprite = sprite;
-            }
-        }
+     
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -74,10 +64,10 @@ namespace UI.Role
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            var roleUIManager = FindObjectOfType<UIManager>();
-            if (roleUIManager != null)
+            var uiManager = FindObjectOfType<UIManager>();
+            if (uiManager != null)
             {
-                roleUIManager.ShowWeaponPanel();
+                uiManager.ShowWeaponPanel();
             }
             else
             {
@@ -91,7 +81,7 @@ namespace UI.Role
             if (data == null) return;
 
             if (_roleDetailAvatar != null)
-                _roleDetailAvatar.sprite = Resources.Load<Sprite>(data.avatarImagePath);
+                _roleDetailAvatar.sprite = _avatar.sprite;
 
             if (_roleDetailRoleName != null)
                 _roleDetailRoleName.text = data.name;
@@ -101,6 +91,16 @@ namespace UI.Role
 
             if (_recordText != null)
                 _recordText.text = data.record;
+        }
+        
+        public void SetRoleData(RoleData data)
+        {
+            _roleData = data;
+            // 设置角色头像
+            if (_avatar == null) return;
+            var sprite = Resources.Load<Sprite>(data.avatarImagePath);
+            if (sprite != null)
+                _avatar.sprite = sprite;
         }
     }
 }

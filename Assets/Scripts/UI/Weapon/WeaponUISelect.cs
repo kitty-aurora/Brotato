@@ -28,7 +28,7 @@ namespace UI.Weapon
             _avatar = transform.Find("Avatar")?.GetComponent<Image>();
 
             // 从单例管理器获取详情面板控件引用
-            if (WeaponUIManager.Instance != null)
+            if (WeaponUIManager.Instance)
             {
                 _weaponDetailAvatar = WeaponUIManager.Instance.weaponDetailAvatar;
                 _weaponDetailName = WeaponUIManager.Instance.weaponDetailName;
@@ -70,6 +70,8 @@ namespace UI.Weapon
         public void OnPointerClick(PointerEventData eventData)
         {
             // 开始选择难度
+            var uiManager = FindAnyObjectByType<UIManager>();
+            uiManager.ShowDifficultyPanel();
         }
 
         public void SetWeaponData(WeaponData weaponData)
