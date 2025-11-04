@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "拳",
-    "avatar": "Image/武器/拳",
+    "avatarImagePath": "Image/武器/拳",
     "grade": 1,
     "price": 11,
     "damage" : 8,
@@ -20,7 +20,7 @@
     "id": 2,
     "name": "树枝",
     "price": 13,
-    "avatar": "Image/武器/树枝",
+    "avatarImagePath": "Image/武器/树枝",
     "grade": 1,
     "damage" : 8,
     "isLong": 0,
@@ -36,7 +36,7 @@
     "id": 3,
     "name": "医疗枪",
     "price": 15,
-    "avatar": "Image/武器/医疗枪",
+    "avatarImagePath": "Image/武器/医疗枪",
     "grade": 1,
     "damage" : 10,
     "isLong": 1,
@@ -45,14 +45,14 @@
     "critical_strikes_probability": 0.03,
     "cooling": 0.95,
     "repel": 0,
-    "describe": "<color=#c3bc93>伤害</color> : 10\n<color=#c3bc93>暴击</color> : X2 (3%概率)\n<color=#c3bc93>冷却</color> : 0.95s\n<color=#c3bc93>范围</color> : 400 (远战)\n<color=#c3bc93>声明窃取</color> : 40% "
+    "describe": "<color=#c3bc93>伤害</color> : 10\n<color=#c3bc93>暴击</color> : X2 (3%概率)\n<color=#c3bc93>冷却</color> : 0.95s\n<color=#c3bc93>范围</color> : 400 (远战)\n<color=#c3bc93>生命窃取</color> : 40% "
 
   },
   {
     "id": 4,
     "name": "手枪",
     "price": 12,
-    "avatar": "Image/武器/手枪",
+    "avatarImagePath": "Image/武器/手枪",
     "grade": 1,
     "damage" : 12,
     "isLong": 1,
@@ -68,7 +68,7 @@
     "id": 5,
     "name": "十字弓",
     "price": 10,
-    "avatar": "Image/武器/十字弓",
+    "avatarImagePath": "Image/武器/十字弓",
     "grade": 1,
     "damage" : 8,
     "isLong": 1,
