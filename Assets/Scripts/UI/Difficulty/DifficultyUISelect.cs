@@ -71,7 +71,8 @@ namespace UI.Difficulty
         public void OnPointerClick(PointerEventData eventData)
         {
             // 开始游戏
-            Debug.Log("todo: 开始游戏");
+            var uiManager = FindAnyObjectByType<UIManager>();
+            uiManager.StartGame();
         }
 
         public void SetDifficultyData(DifficultyData difficultyData)

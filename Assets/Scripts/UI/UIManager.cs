@@ -6,12 +6,15 @@ using UI.Difficulty;
 using UI.Role;
 using UI.Weapon;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace UI
 {
     public class UIManager : MonoBehaviour
     { 
+        [Header("下一个场景标题")][SerializeField] private string sceneToLoad; 
+        
         [Header("标题")] public TextMeshProUGUI titleText;
         
         [Header("角色列表容器")] public Transform roleListParent;
@@ -100,6 +103,11 @@ namespace UI
                 difficultySelect.SetDifficultyData(difficulty);
             }
         }
-        
+
+        public void StartGame()
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
+
     }
 }
