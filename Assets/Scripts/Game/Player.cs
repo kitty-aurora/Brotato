@@ -80,7 +80,7 @@ namespace Game
 
             // 移动动画控制
             bool isMoving = Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f;
-            if (_animator != null) // 避免animator为空时出错
+            if (_animator) // 避免animator为空时出错
             {
                 _animator.SetBool(IsMove, isMoving);
             }
